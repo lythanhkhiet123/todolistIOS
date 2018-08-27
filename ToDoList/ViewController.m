@@ -22,9 +22,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.items = @[@{@"name":@"Take out the trash",@"category": @"Home"},@{@"name":@"Cleaning the house",@"category": @"Home"},@{@"name":@"Reply to important email",@"category":@"Work"}].mutableCopy;
-    self.categories=@[@"Home",@"Work"];
+    self.categories=@[@"Home",@"Work",@"Shopping"];
+    [self.tableView setContentInset:UIEdgeInsetsMake(50,0,0,0)];
     
     self.navigationItem.title =@"To-do list";
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditing:)];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
 }
 
@@ -32,6 +36,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Editing
+
+-(void)toggleEditing:(UIBarButtonItem *)sender{
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+    
+    
+    if (self.tableView.editing)
+    {
+        sender.title =@"Done";
+        sender.style = UIBarButtonItemStylePlain;
+    }else{
+        sender.title = @"Edit";
+        sender.style = UIBarButtonItemStylePlain;
+    }
 }
 
 #pragma mark - Adding items
@@ -46,20 +67,19 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
- if(buttonIndex != alertView.cancelButtonIndex)
- {
-     UITextField *itemNameField = [alertView textFieldAtIndex:0];
-     NSString *itemName = itemNameField.text;
-     NSDictionary *item = @{@"name": itemName, @"category": @"Home"};
-     
-     [self.items addObject:item];
-     NSInteger numHomeItems = [self numberofItemsInCategory:@"Home"];
-     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.items.count -1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-     
-                            
- }
+    if(buttonIndex != alertView.cancelButtonIndex)
+    {
+        UITextField *itemNameField = [alertView textFieldAtIndex:0];
+        NSString *itemName = itemNameField.text;
+        NSDictionary *item = @{@"name": itemName, @"category": @"Home"};
+        
+        [self.items addObject:item];
+        NSInteger numHomeItems = [self numberofItemsInCategory:@"Home"];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:numHomeItems -1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+    }
 }
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath  {
     NSInteger index = [self itemIndexForIndexPath:indexPath];
     NSMutableDictionary *item = [self.items[index] mutableCopy];
@@ -140,6 +160,23 @@
     }
     
     return cell;
+}
+
+
+
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [self removeItemAtIndexPath:indexPath];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 @end
