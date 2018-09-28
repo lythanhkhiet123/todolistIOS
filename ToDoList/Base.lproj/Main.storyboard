@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dvA-zL-nV3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Tfx-xu-Xxz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="-337" y="104"/>
         </scene>
-        <!--View Controller-->
+        <!--LoginView-->
         <scene sceneID="Dgh-og-on5">
             <objects>
-                <viewController id="dvA-zL-nV3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="LoginView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dvA-zL-nV3" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fL2-gs-0rV"/>
                         <viewControllerLayoutGuide type="bottom" id="hI4-y4-C7J"/>
@@ -64,7 +64,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Log in"/>
                                 <connections>
-                                    <segue destination="r01-4B-m6U" kind="show" id="6bZ-Oo-7NN"/>
+                                    <action selector="LoginButton:" destination="dvA-zL-nV3" eventType="touchUpInside" id="21o-ga-7bO"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ez1-l5-09L">
@@ -109,9 +109,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="Tfx-xu-Xxz" kind="show" id="FL4-94-kCe"/>
+                                    <segue destination="Tfx-xu-Xxz" kind="show" id="m3n-LU-BqT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4F-vn-g7V">
+                                <rect key="frame" x="74" y="487" width="231" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.80486386102341612" green="1" blue="0.97454784197691502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -135,15 +142,20 @@
                             <constraint firstItem="I6Z-Wl-gq2" firstAttribute="centerX" secondItem="SLu-fZ-RNJ" secondAttribute="centerX" id="puE-CA-llp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="ez1-l5-09L" id="wqt-bR-hH0"/>
+                        <outlet property="notificationLabel" destination="K4F-vn-g7V" id="OMX-aO-HN7"/>
+                        <outlet property="password" destination="cgt-hy-lfR" id="EWY-0A-ZTF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAd-1w-SKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2050.4000000000001" y="115.59220389805098"/>
         </scene>
-        <!--View Controller-->
+        <!--SignupView-->
         <scene sceneID="NrE-9m-lQ4">
             <objects>
-                <viewController id="Tfx-xu-Xxz" sceneMemberID="viewController">
+                <viewController title="SignupView" id="Tfx-xu-Xxz" customClass="SignupViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PIc-KT-8CH"/>
                         <viewControllerLayoutGuide type="bottom" id="sCg-I8-e0y"/>
@@ -156,6 +168,9 @@
                                 <rect key="frame" x="140.5" y="388" width="94" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Sign up"/>
+                                <connections>
+                                    <action selector="Signup:" destination="Tfx-xu-Xxz" eventType="touchUpInside" id="qAk-2v-6Pv"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qkU-zF-IvB">
                                 <rect key="frame" x="97" y="174" width="183" height="30"/>
@@ -185,8 +200,15 @@
                                     <segue destination="dvA-zL-nV3" kind="show" id="G3M-ea-W1O"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaA-Cd-hVA">
-                                <rect key="frame" x="148" y="138" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaA-Cd-hVA">
+                                <rect key="frame" x="167" y="138" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-7g-G5I">
+                                <rect key="frame" x="57" y="459" width="298" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -213,15 +235,20 @@
                             <constraint firstItem="qkU-zF-IvB" firstAttribute="width" secondItem="jOw-RJ-6Zn" secondAttribute="width" id="wGM-CK-NAf"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="qkU-zF-IvB" id="Vmy-Ni-mq5"/>
+                        <outlet property="notificationLabel" destination="Q87-7g-G5I" id="Yui-Y9-LYJ"/>
+                        <outlet property="password" destination="CLS-Kb-yJD" id="HBy-Cp-t3J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YVj-pQ-v5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2039.2" y="895.50224887556226"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--MainView-->
         <scene sceneID="w8A-V0-OGp">
             <objects>
-                <navigationController id="a2A-oC-hAO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainView" title="MainView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a2A-oC-hAO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gEy-Bl-5I8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -235,7 +262,4 @@
             <point key="canvasLocation" x="-1289" y="104"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6bZ-Oo-7NN"/>
-    </inferredMetricsTieBreakers>
 </document>
